@@ -1,13 +1,81 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bank Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/styles/main.css">
+</head>
+<body>
+  <div id="system-banner" hidden></div>
+  <div class="shell">
+    <header id="navbar" class="navbar"></header>
+    <aside id="sidebar" class="sidebar"></aside>
+    <div id="scrim" class="scrim"></div>
+    <main class="main">
+      <section class="welcome">
+        <div>
+          <p class="eyebrow">Operations overview</p>
+          <h1>Welcome back, Aruj</h1>
+          <p class="muted">Here is what needs attention across the bank today.</p>
+        </div>
+        <button class="btn" type="button" id="new-task-button">
+          <span aria-hidden="true">+</span> New task
+        </button>
+      </section>
+      <section class="stats" aria-label="Task statistics">
+        <article class="stat"><span class="stat__label">Total tasks</span><strong id="stat-total">0</strong></article>
+        <article class="stat"><span class="stat__label">To do</span><strong id="stat-todo">0</strong></article>
+        <article class="stat stat--progress"><span class="stat__label">In progress</span><strong id="stat-progress">0</strong></article>
+        <article class="stat stat--done"><span class="stat__label">Done</span><strong id="stat-done">0</strong></article>
+      </section>
+      <div class="main__head">
+        <div>
+          <h2>Recent tasks</h2>
+          <p class="muted" id="count"></p>
+        </div>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Filter tasks by status">
+        <button class="tab" role="tab" data-filter="all" aria-selected="true">All</button>
+        <button class="tab" role="tab" data-filter="todo" aria-selected="false">To do</button>
+        <button class="tab" role="tab" data-filter="progress" aria-selected="false">In progress</button>
+        <button class="tab" role="tab" data-filter="review" aria-selected="false">In review</button>
+        <button class="tab" role="tab" data-filter="done" aria-selected="false">Done</button>
+      </div>
+      <ul id="task-list" class="grid"></ul>
+      <p id="empty" class="empty" hidden>No tasks match. Clear the search or pick another status.</p>
+    </main>
+  </div>
+  <dialog id="task-dialog" class="task-dialog">
+    <form id="task-form">
+      <div class="task-dialog__head">
+        <div>
+          <p class="eyebrow">Create task</p>
+          <h2>New bank task</h2>
+        </div>
+        <button class="dialog-close" type="button" aria-label="Close">&times;</button>
+      </div>
+      <label>Task title<input name="title" required placeholder="For example, Review account documents"></label>
+      <label>Account<input name="account" required placeholder="SB-00000"></label>
+      <div class="form-row">
+        <label>Status<select name="status"><option value="todo">To do</option><option value="progress">In progress</option><option value="review">In review</option><option value="done">Done</option></select></label>
+        <label>Priority<select name="priority"><option value="medium">Medium</option><option value="high">High</option><option value="low">Low</option></select></label>
+      </div>
+      <div class="task-dialog__actions">
+        <button class="btn btn--secondary dialog-close" type="button">Cancel</button>
+        <button class="btn" type="submit">Add task</button>
+      </div>
+    </form>
+  </dialog>
+  <script src="src/env.js"></script>
+  <script src="src/config.js"></script>
+  <script src="src/data/tasks.js"></script>
+  <script src="src/components/SystemBanner.js"></script>
+  <script src="src/components/Navbar.js"></script>
+  <script src="src/components/Sidebar.js"></script>
+  <script src="src/components/TaskCard.js"></script>
+  <script src="src/main.js"></script>
+</body>
 </html>

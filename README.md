@@ -1,16 +1,29 @@
-# React + Vite
+# Bank Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Secure enterprise banking workspace - built incrementally. **Day 1:** repo setup, environment config,
+dynamic system banner, and a responsive dashboard shell (Navbar, Sidebar, Task Cards).
 
-Currently, two official plugins are available:
+## Run
+```bash
+git clone <your-repo-url> && cd bank-management-system
+cp .env.example .env        # edit values
+npm start                   # builds src/env.js from .env and serves on http://localhost:3000
+```
+No build tools needed: open `index.html` directly also works (uses `src/env.js`).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Structure
+```
+.env.example            environment template (commit)   | .env  real values (git-ignored)
+scripts/build-env.js    turns public .env values into src/env.js (secrets are never exported)
+src/config.js           typed config from env
+src/components/         SystemBanner, Navbar, Sidebar, TaskCard
+src/data/tasks.js       sample banking tasks
+src/styles/main.css     design tokens + responsive layout
+```
 
-## React Compiler
+## System banner
+Priority order: offline > maintenance window > upcoming maintenance > custom `BANNER_MESSAGE` > non-production notice.
+Set `BANNER_MAINTENANCE_START/END` (ISO dates) in `.env` to test.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Roadmap
+Auth & roles, accounts/transactions API, attachments, real-time updates, AI document assistant.
